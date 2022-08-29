@@ -5,6 +5,16 @@ const regionsURL = 'https://psa.gov.ph/classification/psgc/?q=psgc/regions';
 
 console.clear();
 
+/* 
+
+	Scraping Steps
+	Get Regions data
+	TODO: Use correspondence code from region to get provinces
+	TODO: Use correspondence code from province to get cities
+	TODO: Use correspondence code from cities to get barangays
+
+*/
+
 async function scrape() {
 	const { data } = await axios.get(regionsURL);
 
@@ -13,7 +23,10 @@ async function scrape() {
 
 	const scrapedData = [];
 
+	// indent hell starts here
 	table.each((index, el) => {
+
+		// Region
 		const regionStr = $(el)
 			.children('thead')
 			.children('tr')
@@ -33,6 +46,10 @@ async function scrape() {
 			regionName.length + tenDigitStrLen
 		);
 
+		// Region - Province
+		
+
+
 		region = {
 			regionName: regionName.replace("Region: ", ""),
 			tenDigitCode: tenDigitCode.replace("10 Digit Code: ", ""),
@@ -42,34 +59,6 @@ async function scrape() {
 		scrapedData.push(region);
 	});
 
-	debugger;
-
-	console.log(scrapedData);
-
-	// provinceTable.each((index, el) => {
-	// 	const iso = $(el).find('th').text();
-
-	// 	scrapedData.push([iso, "as"]);
-	// });
-
-	// console.dir(typeof provinceTable);
-	// const scrapedData = [];
-
-	// books.each((index, el) => {
-	// 	const scrapItem = { title: '', price: '' };
-	// 	scrapItem.title = $(el).children('h3').text();
-	// 	scrapItem.price = $(el)
-	// 		.children('.product_price')
-	// 		.children('p.price_color')
-	// 		.text();
-
-	// 	scrapedData.push(scrapItem);
-	// });
-
-	// console.log(scrapedData);
-	// tableRows.each(row => {
-	// 	console.log(row);
-	// });
 }
 
 scrape();
