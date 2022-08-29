@@ -1,0 +1,1 @@
+regionName.slice(-1)
