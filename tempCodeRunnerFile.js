@@ -1,1 +1,0 @@
-regionName.slice(-1)
