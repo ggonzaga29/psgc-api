@@ -1,11 +1,11 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
 
-const regionsURL =
+const REGIONS_URL =
 	'https://psa.gov.ph/classification/psgc/?q=psgc/regions';
 
 async function regions() {
-	const { data } = await axios.get(regionsURL);
+	const { data } = await axios.get(REGIONS_URL);
 
 	const $ = cheerio.load(data);
 	const table = $('#classifytable');
